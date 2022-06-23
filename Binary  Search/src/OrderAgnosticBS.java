@@ -8,7 +8,7 @@ public class OrderAgnosticBS {
                 if (arr[mid] > target) {
                     end = mid - 1;
                 } else if (arr[mid] < target) {
-                    start = start + 1;
+                    start = mid + 1;
                 } else {
                     return mid;
                 }
