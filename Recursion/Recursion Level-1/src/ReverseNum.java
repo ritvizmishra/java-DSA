@@ -3,6 +3,7 @@ public class ReverseNum {
         reverse1(7326);
         System.out.println(sum);
         System.out.println(reverse2(7326));
+        reverse3(7326);
     }
 //    Method 1:
     static int sum = 0;
@@ -26,5 +27,15 @@ public class ReverseNum {
         }
         int digit = n % 10;
         return digit * (int)(Math.pow(10, arg-1)) + helper(n/10, arg - 1);
+    }
+
+//    Method 3
+    static void reverse3(int n){
+        if(n % 10 == 0){
+            return;
+        }
+        int digits = n % 10;
+        System.out.print(digits);
+        reverse3(n / 10);
     }
 }
