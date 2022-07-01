@@ -1,3 +1,5 @@
+package ClassAndObject;
+
 public class ClassObject {
     public static void main(String[] args){
 
@@ -35,7 +37,7 @@ public class ClassObject {
         String name;
         float marks;
 
-//        function inside a class
+//        function inside Static.a class
         void greetings(){
             System.out.println("Hello! My name is " + name);
         }
