@@ -8,4 +8,5 @@ public class Twin {
         System.out.println(twin.age + " " + twin.name);
 
     }
+
 }
