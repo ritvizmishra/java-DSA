@@ -10,30 +10,30 @@ public class LetterCombination {
 //    static List<String> letterCombinations(String digits){
 //
 //    }
-    static void combination(String strNew, String str){
-        if(str.isEmpty()){int digits = str.charAt(0) - '0';
+    static void combination(String strNew, String str){int digits = str.charAt(0) - '0';
 
-            if(digits == 7){
-                for(int i = (digits - 2) * 3; i < (digits * 3) - 2; i++){
-                    char ch = (char)('a' + i);
+        if(digits == 7){
+            for(int i = (digits - 2) * 3; i < (digits * 3) - 2; i++){
+                char ch = (char)('a' + i);
 
-                    combination(strNew + ch, str.substring(1));
-                }
+                combination(strNew + ch, str.substring(1));
             }
-            else if(digits == 9){
-                for(int i = ((digits - 2) * 3) + 1; i < (digits * 3) - 1; i++){
-                    char ch = (char)('a' + i);
+        }
+        else if(digits == 9){
+            for(int i = ((digits - 2) * 3) + 1; i < (digits * 3) - 1; i++){
+                char ch = (char)('a' + i);
 
-                    combination(strNew + ch, str.substring(1));
-                }
+                combination(strNew + ch, str.substring(1));
             }
+        }
 
-            else {
-                for (int i = (digits - 2) * 3; i < (digits * 3) - 3; i++) {
-                    char ch = (char) ('a' + i);
+        else {
+            for (int i = (digits - 2) * 3; i < (digits * 3) - 3; i++) {
+                char ch = (char) ('a' + i);
 
-                    combination(strNew + ch, str.substring(1));
-                }
+                combination(strNew + ch, str.substring(1));
+            }
+        if(str.isEmpty()){
             System.out.print(strNew + " ");
             return;
         }
