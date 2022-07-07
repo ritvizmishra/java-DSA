@@ -58,6 +58,38 @@ public class SinglyLinkedList {
             size++;
 
     }
+    
+//     insert using recursion
+    public void insertRec(int value, int index){
+        head = insertRec(value, index, head);
+    }
+
+//    method for recursion
+    private Node insertRec(int value, int index, Node node){
+        if(index == 0){
+            Node temp = new Node(value, node);
+            size++;
+            return temp;
+        }
+        node.next = insertRec(value, --index, node.next);
+        return node;
+    }
+
+//    reverse using recursion
+    public void reverse(Node node){
+
+        if(node == tail){
+            head = tail;
+            return;
+        }
+
+        reverse(node.next);
+
+        tail.next = node;
+        tail = node;
+        tail.next = null;
+    }
+
 
 //    delete at head
     public int deleteFirst(){
