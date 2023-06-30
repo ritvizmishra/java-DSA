@@ -13,4 +13,12 @@ If any cell (i,j) contains the value 0, we will mark ith index of row array i.e.
 We will perform step 3 for every cell containing 0.
 Finally, we will again traverse the entire matrix and we will put 0 into all the cells (i, j) for which either row[i] or col[j] is marked as -1.
 
+## [118. Pascal's Triangle](https://leetcode.com/problems/pascals-triangle/description/)
+Given an integer numRows, return the first numRows of Pascal's triangle. In Pascal's triangle, each number is the sum of the two numbers directly above it.
+
+![Screenshot (258)](https://github.com/ritvizmishra/java-DSA/assets/104827211/3ec3bf37-f3bb-4c6e-baeb-8442ab9f440c)
+### Mathematical Approach
+The first and Last Elements of each row will be 1; Each row will have elements equivalent to that row; Lastly, apply the formula: 
+``pascalTriangle[row-1][col - 1] + pascalTriangle[row-1][col]``
+
 
