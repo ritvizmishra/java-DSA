@@ -112,6 +112,28 @@ Find largest index j such that `j ≥ i` and `array[j] > array[i − 1]`.
 Swap `array[j]` and `array[i − 1]`.
 Reverse the suffix starting at `array[i]`.
 
+## [53. Maximum Subarray](https://leetcode.com/problems/maximum-subarray/description/)
+#### Kadane's Algorithm
+Given an integer array nums, find the subarray with the largest sum, and return its sum.
+
+    // A subarray is a contiguous non-empty sequence of elements within an array.
+    class Solution {
+        public int maxSubArray(int[] nums) {
+            int currentSum = nums[0];
+            int maxSum = nums[0];
+            
+            for(int i = 1; i < nums.length; i++){
+                // if the currentSum + nums[i] goes below currentSum we will not consider it
+                // as it will decrease the value and we want maximum as the answer.
+               currentSum = Math.max(nums[i], currentSum + nums[i]);
+               maxSum = Math.max(maxSum, currentSum);
+            }
+            return maxSum;
+        }
+    }
+For each element `nums[i]`, calculate the maximum between `nums[i]` itself and the sum of the current subarray `(currentSum) plus nums[i]`. This step ensures that we either `start a new` subarray at `nums[i]` or `extend` the existing subarray with `nums[i]` if it results in a larger sum.
+Update `currentSum` with the maximum value obtained from the previous step.
+Update `maxSum` with the maximum value between the previous `maxSum` and the updated `currentSum`.  
 
 
 
