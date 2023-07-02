@@ -136,8 +136,7 @@ Update `currentSum` with the maximum value obtained from the previous step.
 Update `maxSum` with the maximum value between the previous `maxSum` and the updated `currentSum`.
 
 ## [75. Sort Colors](https://leetcode.com/problems/sort-colors/description/)
-Given an array nums with n objects colored red, white, or blue, sort them in-place so that objects of the same color are adjacent, with the colors in the order red, white, and blue.
-We will use the integers 0, 1, and 2 to represent the color red, white, and blue, respectively. You must solve this problem without using the library's sort function.
+Given an array nums with n objects colored red, white, or blue, sort them in-place so that objects of the same color are adjacent, with the colors in the order red, white, and blue. We will use the integers 0, 1, and 2 to represent the color red, white, and blue, respectively. You must solve this problem without using the library's sort function.
 
     class Solution {
         public void sortColors(int[] nums) {
@@ -193,6 +192,26 @@ If arr[mid] == 1, we will just increment the mid pointer and then the index (mid
 If arr[mid] == 2, we will swap arr[mid] and arr[high] and will decrement high. Now the subarray from index high+1 to (n-1) only contains 2.
 In this step, we will do nothing to the mid-pointer as even after swapping, the subarray from mid to high(after decrementing high) might be unsorted. So, we will check the value of mid again in the next iteration.
 
+## [121. Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/)
+You are given an array prices where prices[i] is the price of a given stock on the ith day. You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock. Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
+
+    class Solution {
+        public int maxProfit(int[] prices) {
+            int n = prices.length;
+            int minPrice = prices[0];
+            int profit = 0;
+    
+            for(int i = 0; i < n; i++){
+                minPrice = Math.min(minPrice, prices[i]);
+                int currentProfit = prices[i] - minPrice;
+                profit = Math.max(profit, currentProfit);
+            }
+            return profit;
+        }
+    }
+Find min: which is the minimum of the current price and the current minimum.
+Find currentProfit: which is the current price minus the current minimum.
+Find profit: which is the maximum of current profit and profit.
 
 
 
