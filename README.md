@@ -133,7 +133,66 @@ Given an integer array nums, find the subarray with the largest sum, and return 
     }
 For each element `nums[i]`, calculate the maximum between `nums[i]` itself and the sum of the current subarray `(currentSum) plus nums[i]`. This step ensures that we either `start a new` subarray at `nums[i]` or `extend` the existing subarray with `nums[i]` if it results in a larger sum.
 Update `currentSum` with the maximum value obtained from the previous step.
-Update `maxSum` with the maximum value between the previous `maxSum` and the updated `currentSum`.  
+Update `maxSum` with the maximum value between the previous `maxSum` and the updated `currentSum`.
+
+## [75. Sort Colors](https://leetcode.com/problems/sort-colors/description/)
+Given an array nums with n objects colored red, white, or blue, sort them in-place so that objects of the same color are adjacent, with the colors in the order red, white, and blue.
+We will use the integers 0, 1, and 2 to represent the color red, white, and blue, respectively. You must solve this problem without using the library's sort function.
+
+    class Solution {
+        public void sortColors(int[] nums) {
+            int countZero = 0;
+            int countOne = 0;
+            int countTwo = 0;
+    
+            for(int i = 0; i < nums.length; i++){
+                if(nums[i] == 0) countZero++;
+                else if(nums[i] == 1) countOne++;
+                else countTwo++;
+            }
+    
+            for(int i = 0; i < countZero; i++) nums[i] = 0;
+            for(int i = countZero; i < countZero + countOne; i++) nums[i] = 1;
+            for(int i = countZero + countOne; i < countZero + countOne + countTwo; i++) nums[i] = 2;
+        }
+    }
+Take 3 variables to maintain the count of 0, 1 and 2.
+Travel the array once and increment the corresponding counting variables
+In 2nd traversal of array, we will now over write the first ‘a’ indices / positions in array with ’0’, the next ‘b’ with ‘1’ and the remaining ‘c’ with ‘2’.
+
+    // Dutch National Flag Algorithm. 
+    class Solution {
+        public void sortColors(int[] nums) {
+            int low = 0;
+            int mid = 0;
+            int high = nums.length - 1;
+    
+            while(mid <= high){
+                if(nums[mid] == 0){
+                    swap(nums, low, mid);
+                    low++;
+                    mid++;
+                }
+                else if(nums[mid] == 1) mid++;
+                else{
+                    swap(nums, mid, high);
+                    high--;
+                }
+            }
+        }
+    
+        void swap(int[] nums, int i, int j){
+            int temp = nums[i];
+            nums[i] = nums[j];
+            nums[j] = temp;
+        }
+    }
+#### Dutch National Flag Algorithm
+If arr[mid] == 0, we will swap arr[low] and arr[mid] and will increment both low and mid. Now the subarray from index 0 to (low-1) only contains 0.
+If arr[mid] == 1, we will just increment the mid pointer and then the index (mid-1) will point to 1 as it should according to the rules.
+If arr[mid] == 2, we will swap arr[mid] and arr[high] and will decrement high. Now the subarray from index high+1 to (n-1) only contains 2.
+In this step, we will do nothing to the mid-pointer as even after swapping, the subarray from mid to high(after decrementing high) might be unsorted. So, we will check the value of mid again in the next iteration.
+
 
 
 
