@@ -213,6 +213,64 @@ Find min: which is the minimum of the current price and the current minimum.
 Find currentProfit: which is the current price minus the current minimum.
 Find profit: which is the maximum of current profit and profit.
 
+## [29. Divide Two Integers](https://leetcode.com/problems/divide-two-integers/description/)
+Given two integers dividend and divisor, divide two integers without using multiplication, division, and mod operator.
+The integer division should truncate toward zero, which means losing its fractional part. For example, 8.345 would be truncated to 8, and -2.7335 would be truncated to -2.
+Return the quotient after dividing dividend by divisor.
+Note: Assume we are dealing with an environment that could only store integers within the 32-bit signed integer range: [−231, 231 − 1]. For this problem, if the quotient is strictly greater than 231 - 1, then return 231 - 1, and if the quotient is strictly less than -231, then return -231.
+
+#### Intuition
+The division operation is essentially a repeated subtraction process. We can think of it as finding out how many times the divisor can be subtracted from the dividend before the dividend becomes smaller than the divisor.
+
+#### Approach
+1. Handle the special case where the dividend is Integer.MIN_VALUE and the divisor is -1, as this case would result in an overflow. In this case, return Integer.MAX_VALUE.
+2. Determine the sign of the result based on the signs of the dividend and divisor.
+3. Convert both the dividend and divisor to long to avoid potential integer overflow during calculations.
+4. Initialize a variable "quotient" to keep track of the result of the division.
+5. Use a while loop to repeatedly subtract a portion of the divisor from the dividend until the dividend becomes smaller than the divisor.
+6. Inside the loop, start with a temporary variable "temp" set to the value of the divisor and a "multiple" variable set to 1.
+7. Use a nested while loop to double both "temp" and "multiple" as long as subtracting "temp" from the dividend would still be valid.
+8. After the nested loop, subtract "temp" from the dividend and add "multiple" to the quotient to keep track of the division result.
+9. Continue this process until the dividend becomes smaller than the divisor.
+10. Adjust the final result by multiplying it with the previously determined sign.
+11. Return the result, ensuring it's within the 32-bit signed integer range.
+
+#### Complexity
+- Time complexity:
+The time complexity of this approach is approximately O(log N), where N is the value of the dividend. This is because the divisor is doubled in each iteration of the loop until it becomes greater than the remaining dividend.
+
+- Space complexity:
+The space complexity is O(1), as only a few variables are used to keep track of the calculations and no additional data structures are used.
+
+#### Code
+```
+class Solution {
+    public int divide(int dividend, int divisor) {
+        if (dividend == Integer.MIN_VALUE && divisor == -1) {
+            return Integer.MAX_VALUE;
+        }
+        
+        int sign = (dividend < 0) ^ (divisor < 0) ? -1 : 1;
+        long ldividend = Math.abs((long) dividend);
+        long ldivisor = Math.abs((long) divisor);
+        
+        long quotient = 0;
+        while (ldividend >= ldivisor) {
+            long temp = ldivisor;
+            long multiple = 1;
+            while (ldividend >= (temp << 1)) {
+                temp <<= 1;
+                multiple <<= 1;
+            }
+            ldividend -= temp;
+            quotient += multiple;
+        }
+        
+        return (int) (sign * quotient);
+    }
+}
+
+```
 
 
 
