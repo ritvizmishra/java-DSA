@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 These are codes for DSA.
+=======
+These are codes for Java.
+>>>>>>> 3f01e033a9c4bdb1c96f44c49d7fc1ce1fbe1c80
